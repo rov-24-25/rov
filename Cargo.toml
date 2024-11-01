@@ -1,0 +1,20 @@
+[package]
+name = "finale"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+linux-embedded-hal = "0.4.0"
+rppal = {version="0.17.1",features=["hal"]}
+tokio = {version="1", features=["full"]}
+linux-embedded-hal-mpu = {version="0.3.0", package="linux-embedded-hal"}
+pwm-pca9685="1.0.0"
+hyper = { version = "0.14", features = ["full"] }
+mime = "0.3"
+mpu6050 = "0.1.6"
+async-stream = "0.3"
+serde_json = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+
