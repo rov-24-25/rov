@@ -14,18 +14,14 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     // Démarrer les moteurs sur certains canaux
     pwm.set_channel_on_off(Channel::C0, 0, 2048)?; // Canal 0 à 50% duty cycle
-    pwm.set_channel_on_off(Channel::C1, 0, 3072)?; // Canal 1 à 75% duty cycle
-    pwm.set_channel_on_off(Channel::C2, 0, 1024)?; // Canal 2 à 25% duty cycle
 
-    println!("Moteurs activés. Les canaux envoient des signaux PWM.");
+    println!("Moteur activé. Le canal envoie des signaux PWM.");
 
     std::thread::sleep(std::time::Duration::from_secs(10));
 
     // Arrêter les moteurs
     pwm.set_channel_on_off(Channel::C0, 0, 0)?; 
-    pwm.set_channel_on_off(Channel::C1, 0, 0)?; 
-    pwm.set_channel_on_off(Channel::C2, 0, 0)?; 
-    println!("Moteurs arrêtés.");
+    println!("Moteurr arrêté.");
 
     Ok(())
 }
