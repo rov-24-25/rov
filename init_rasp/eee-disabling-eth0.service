@@ -1,0 +1,9 @@
+[Unit]
+Description=Improving eth0 link stability by disabling defective EEE
+After=network.target
+
+[Service]
+ExecStart=/usr/local/sbin/eee-disabling-eth0.sh
+
+[Install]
+WantedBy=multi-user.target
