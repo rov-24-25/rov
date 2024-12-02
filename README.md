@@ -17,20 +17,20 @@ This is the binary that is supposed to continually run on the Raspberry embedded
 
 This section explains how to use SSH keys to connect to the Raspberry and upload files to it without having to enter the password everytime.
 
-### Generating a SSH key
+### Generating a SSH key pair
 
-First, you must generate a new SSH key using the command-line software `ssh-keygen`.
+First, you must generate a new SSH key pair using the command-line tool `ssh-keygen`.
 
 From the command line, run `ssh-keygen`.
 
     PS C:\Users\johndoe> ssh-keygen
     Generating public/private ed25519 key pair.
 
-Give the filename and file path you want when asked for it. **Remember you need to put the full path (and not just the filename).** I advise to keep in in your home `.ssh` folder. I advise something like `C:\Users\myself\.ssh\rov_key`.
+Give the filename and file path you want when asked for it. **Remember you need to put the full path (and not just the filename).** I advise you to keep it in your home `.ssh` folder. I advise something like `C:\Users\johndoe\.ssh\rov_key`.
 
     Enter file in which to save the key (C:\Users\johndoe/.ssh/id_ed25519): C:\Users\johndoe\.ssh\rov_key
 
-Then, press `Enter` **without typing anything** twice to specify no password.
+Then, press `Enter` twice **without typing anything** to specify no password.
 
 You should now see:
 
@@ -64,11 +64,11 @@ If we go to the folder we specified when generating our SSH key, we should see t
     -a---           12/2/2024  1:20 PM            419 rov_key
     -a---           12/2/2024  1:20 PM            110 rov_key.pub
 
-The `rov_key` file (or whatever you chose to name our SSH key) is your private key of your key pair, **it must remain private, which means it must not leave your computer.**
+The `rov_key` file (or whatever you chose to name our SSH key) is your private key of your key pair, **it MUST REMAIN PRIVATE, which means it must not leave your computer.**
 
 The `rov_key.pub` file is the public key of your key pair. It must be sent to the Rasp so that it can identify you.
 
-To do so, open the file. It should contain only one line:
+To do so, open your newly-generated public key (`rov_key.pub`). It should contain only one line. Yours will be different, but mine is:
 
     ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICeUVX/mwM9Zf4WCUgyVNrNpjnMaVm5KVAqW77rh9KwI johndoe@****
 
@@ -78,15 +78,17 @@ To do so, first send the public key file to the Rasp, the location in the Rasp d
 
     scp C:\Users\johndoe\.ssh\rov_key.pub pi@raspberrypi.local:/home/pi/rov_key.pub
 
-You will need to type the SSH password.
+(Modify this command so that the paths are correct on your computer.)
+
+You will then need to type the SSH password.
 
 Once this is done, you should see something like:
 
-    rov_key.pub                                                                           100%  110     6.7KB/s   00:00
+    rov_key.pub                                            100%  110     6.7KB/s   00:00
 
 That means our public key is on the Rasp! But it is not at the correct location yet!
 
-Let’s connect to the Rasp using SSH and the password login.
+Let’s first connect to the Rasp using SSH and the password login.
 
     PS C:\Users\johndoe> ssh pi@raspberrypi.local
 
@@ -99,6 +101,8 @@ Then, we execute the command:
 Now, we can disconnect from the Rasp, then reconnect to it using SSH!
 
     PS C:\Users\johndoe> ssh -i .\.ssh\rov_key pi@raspberrypi.local
+    
+No more need to type the password everytime!
 
 Not that the command to copy a file over SSH, `scp`, can also be run the same way:
 
