@@ -11,7 +11,7 @@ This is the binary that is supposed to continually run on the Raspberry embedded
 5. `sudo apt install git`
 6. Generate deploy keys.
 7. `git clone https://github.com/rov-24-25/rov.git`
-8. `sudo ethtool --set-eee eth0 eee off` To prevent the Rasp from dropping the Ethernet connection after some inactivity.
+8. Copy `init_rasp` folder to the Rasp itself and run `setup_rash.sh`, to prevent the Rasp from dropping the Ethernet connection after some inactivity.
 
 ## Setting up SSH on the Raspberry
 
